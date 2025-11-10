@@ -430,8 +430,6 @@
 
         <div class="result" id="result">
             <h2>✓ Assessment Submitted Successfully</h2>
-            <p>Your Total Score:</p>
-            <div class="score" id="totalScore">0</div>
             <p class="note">Thank you for your submission. The doctor will review your assessment and contact you shortly.</p>
         </div>
     </div>
@@ -470,8 +468,7 @@
                 document.getElementById('loading').classList.remove('show');
                 
                 if (response.ok) {
-                    // Show success with score
-                    document.getElementById('totalScore').textContent = totalScore;
+                    // Show success message (score hidden from user)
                     document.getElementById('result').classList.add('show');
                     document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
                     
