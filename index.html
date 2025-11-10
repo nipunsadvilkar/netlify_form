@@ -81,6 +81,39 @@
             transition: border-color 0.3s;
         }
 
+        .phone-input-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .phone-input-container:focus-within {
+            border-color: #667eea;
+        }
+
+        .country-code {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            color: #666;
+            font-weight: 600;
+            font-size: 14px;
+            border-right: 1px solid #ddd;
+        }
+
+        .phone-input-container input[type="tel"] {
+            border: none;
+            padding: 12px 15px;
+            border-radius: 0;
+        }
+
+        .phone-input-container input[type="tel"]:focus {
+            border: none;
+            outline: none;
+        }
+
         input:focus,
         select:focus,
         textarea:focus {
@@ -190,7 +223,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Ayurvedic Stool Analyzer Tool Study</h1>
+        <h1>Ayurvedic Stool Analyzer Tool</h1>
         
         <form name="stool-analyzer" method="POST" data-netlify="true" id="stoolForm">
             <input type="hidden" name="form-name" value="stool-analyzer" />
@@ -210,7 +243,11 @@
                 </div>
                 <div class="form-group">
                     <label>Contact Number: *</label>
-                    <input type="tel" name="contact" required>
+                    <div class="phone-input-container">
+                        <span class="country-code">+91</span>
+                        <input type="tel" name="contact" pattern="[6-9][0-9]{9}" title="Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9" required placeholder="9876543210">
+                    </div>
+                    <p class="note">Enter 10-digit mobile number</p>
                 </div>
             </div>
 
@@ -489,6 +526,19 @@
 
         // Set today's date as default
         document.querySelector('input[type="date"]').valueAsDate = new Date();
+
+        // Validate Indian mobile number
+        const contactInput = document.querySelector('input[name="contact"]');
+        contactInput.addEventListener('input', function() {
+            const value = this.value;
+            const indianMobilePattern = /^[6-9][0-9]{9}$/;
+            
+            if (value && !indianMobilePattern.test(value)) {
+                this.setCustomValidity('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
     </script>
 </body>
 </html>
