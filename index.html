@@ -1,37 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TAE</title>
+    <title>Ayurvedic Stool Analyzer Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .patient-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 30px;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .note {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
 </head>
-
 <body>
-<form name="contact" method="POST" data-netlify="true">
-  <p>
-    <label>Your Name: <input type="text" name="name" /></label>
-  </p>
-  <p>
-    <label>Your Email: <input type="email" name="email" /></label>
-  </p>
-  <p>
-    <label>Your Role: <select name="role[]" multiple>
-      <option value="leader">Leader</option>
-      <option value="follower">Follower</option>
-    </select></label>
-  </p>
-  <p>
-    <label>Message: <textarea name="message"></textarea></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
-</form>
+    <div class="container">
+        <h1>Ayurvedic Stool Analyzer Tool Study</h1>
+        
+        <form name="stool-analyzer" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="stool-analyzer" />
+            
+            <div class="patient-info">
+                <div class="form-group">
+                    <label>Name / Initials: *</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Age: *</label>
+                    <input type="number" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender: *</label>
+                    <select name="gender" required>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date: *</label>
+                    <input type="date" name="date" required>
+                </div>
+            </div>
 
+            <div class="form-group">
+                <label>Email (optional):</label>
+                <input type="email" name="email" placeholder="patient@example.com">
+            </div>
 
-</form>
+            <h2>Specific Questions</h2>
+
+            <div class="form-group">
+                <label>A. What color is the stool? *</label>
+                <select name="A_color" required>
+                    <option value="">Select an option</option>
+                    <option value="Brown (9)">Brown</option>
+                    <option value="Yellow (6)">Yellow</option>
+                    <option value="White (3)">White</option>
+                    <option value="Green (3)">Green</option>
+                    <option value="Red (3)">Red</option>
+                    <option value="Black (3)">Black</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>B. How would you describe the stool? *</label>
+                <select name="B_description" required>
+                    <option value="">Select an option</option>
+                    <option value="Grade 1 - Separate Hard lumps like nuts (3)">Grade 1 - Separate Hard lumps like nuts</option>
+                    <option value="Grade 2 - Sausage-shaped but lumpy stool (3)">Grade 2 - Sausage-shaped but lumpy stool</option>
+                    <option value="Grade 3 - Sausage like stool but with cracks on the surface (6)">Grade 3 - Sausage like stool but with cracks on the surface</option>
+                    <option value="Grade 4 - Sausage like shape, smooth and soft (9)">Grade 4 - Sausage like shape, smooth and soft</option>
+                    <option value="Grade 5 - Soft blobs with clearcut edges (6)">Grade 5 - Soft blobs with clearcut edges</option>
+                    <option value="Grade 6 - Fluffy pieces with ragged edges, a mushy stool (3)">Grade 6 - Fluffy pieces with ragged edges, a mushy stool</option>
+                    <option value="Grade 7 - Entirely liquid / watery with no solid pieces (3)">Grade 7 - Entirely liquid / watery with no solid pieces</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>C. How often do you have a bowel movement? *</label>
+                <select name="C_frequency" required>
+                    <option value="">Select an option</option>
+                    <option value="Once a day (9)">Once a day</option>
+                    <option value="Twice a day (6)">Twice a day</option>
+                    <option value="Thrice a day (3)">Thrice a day</option>
+                    <option value="More than thrice a day (3)">More than thrice a day</option>
+                    <option value="Once in 2 days (6)">Once in 2 days</option>
+                    <option value="Once in 3 days (3)">Once in 3 days</option>
+                    <option value="More than 3 days (3)">More than 3 days</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>D. How complete is the evacuation? *</label>
+                <select name="D_evacuation" required>
+                    <option value="">Select an option</option>
+                    <option value="Complete evacuation (9)">Complete evacuation</option>
+                    <option value="Occasionally incomplete evacuation (6)">Occasionally incomplete evacuation</option>
+                    <option value="Incomplete evacuation (3)">Incomplete evacuation</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>E. How would you describe any pain in abdomen just before/during or after defecation? *</label>
+                <select name="E_abdomen_pain" required>
+                    <option value="">Select an option</option>
+                    <option value="No pain (9)">No pain</option>
+                    <option value="Slight self-subsiding pain in abdomen (6)">Slight self-subsiding pain in abdomen</option>
+                    <option value="Remarkable pain in abdomen (needs medication to subside) (3)">Remarkable pain in abdomen (needs medication to subside)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>F. How would you describe any pain at anal region just before/during or after defecation? *</label>
+                <select name="F_anal_pain" required>
+                    <option value="">Select an option</option>
+                    <option value="No pain (9)">No pain</option>
+                    <option value="Slight self-subsiding pain at anal region (6)">Slight self-subsiding pain at anal region</option>
+                    <option value="Remarkable pain at anal region (needs medication to subside) (3)">Remarkable pain at anal region (needs medication to subside)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>G. How often do you experience straining? *</label>
+                <select name="G_straining" required>
+                    <option value="">Select an option</option>
+                    <option value="No straining (9)">No straining</option>
+                    <option value="Slight straining (6)">Slight straining</option>
+                    <option value="Frequent straining (3)">Frequent straining</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>H. How would you describe the stool odor? *</label>
+                <select name="H_odor" required>
+                    <option value="">Select an option</option>
+                    <option value="Normal stool odor (9)">Normal stool odor</option>
+                    <option value="Slight offensive odor (6)">Slight offensive odor</option>
+                    <option value="Strong offensive odor (3)">Strong offensive odor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>I. Does the stool float or sink? *</label>
+                <select name="I_float_sink" required>
+                    <option value="">Select an option</option>
+                    <option value="Floating (9)">Floating</option>
+                    <option value="Some floating & some sinking (6)">Some floating & some sinking</option>
+                    <option value="Sinking (3)">Sinking</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>J. Is there any other material passed along with stool? *</label>
+                <select name="J_other_material" required>
+                    <option value="">Select an option</option>
+                    <option value="None (0)">None</option>
+                    <option value="Undigested food particles (3)">Undigested food particles</option>
+                    <option value="Worms (3)">Worms</option>
+                    <option value="Froth (3)">Froth</option>
+                    <option value="Mucus (3)">Mucus</option>
+                    <option value="Blood (3)">Blood</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>K. Do you feel sense of urgency for defecation? *</label>
+                <select name="K_urgency" required>
+                    <option value="">Select an option</option>
+                    <option value="No urgency (9)">No urgency</option>
+                    <option value="Sense of urgency (3)">Sense of urgency</option>
+                </select>
+            </div>
+
+            <h2>General Questions</h2>
+
+            <div class="form-group">
+                <label>1. Do you feel proper hunger today? *</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="Q1_hunger" value="yes" required>
+                        <span>Yes</span>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="Q1_hunger" value="no" required>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>2. Did you overeat today? *</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="Q2_overeat" value="yes" required>
+                        <span>Yes</span>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="Q2_overeat" value="no" required>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>3. Did you eat heavy food today? *</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="Q3_heavy_food" value="yes" required>
+                        <span>Yes</span>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="Q3_heavy_food" value="no" required>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>4. Usually do you feel complete bowel evacuation? *</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="Q4_usual_evacuation" value="yes" required>
+                        <span>Yes</span>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="Q4_usual_evacuation" value="no" required>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Upload Stool Image: *</label>
+                <input type="file" name="stool_image" accept="image/*" required>
+                <p class="note">Supported formats: JPG, PNG (Max 10MB)</p>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Notes (optional):</label>
+                <textarea name="notes" rows="4" placeholder="Any additional symptoms or observations..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Assessment</button>
+            
+            <p class="note" style="margin-top: 20px; text-align: center;">
+                After submission, you'll see a success page. The doctor will calculate your score and contact you.
+            </p>
+        </form>
+    </div>
 </body>
-
 </html>
